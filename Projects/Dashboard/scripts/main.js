@@ -1,3 +1,5 @@
+requirements = ["name", "description", "filename", "extension", "price"];
+
 var dataContainer = document.querySelector("#data");
 
 var itemsContainer = document.createElement("ul");
@@ -13,26 +15,22 @@ mainCheckbox.addEventListener("change", function() {
     }
 });
 
-function getValue (value) {
+function getValue (value, property) {
     if (typeof value === "string" || typeof value === "number")
     {
-        var container = document.createElement("li");
-        itemDataContainer.appendChild(container);
-        container.textContent = value
-        console.log(value);
-    };
-    if (typeof value === "array")
-    {
-        for (var k = 0; k < value.length; k++)
+        if (requirements.indexOf(property) != -1)
         {
-             getValue (value[k]);
+            var label = document.createElement("div");
+            label.className = property;
+    		label.textContent = value;
+            itemDataContainer.appendChild(label);
         }
     };
     if (typeof value === "object")
     {
         for (var prop in value)
         {
-             getValue (value[prop]);
+             getValue (value[prop], prop);
         }
     };
 }
@@ -41,24 +39,23 @@ dataContainer.appendChild(mainCheckbox);
 
 for (var i = 0; i < items.length; i++) 
 {
-    var item = items[i];
-    console.log(item)
-
-    var itemContainer = document.createElement("li");
-    var itemDataContainer = document.createElement("ul");
-
-    getValue(item);
-
-    var checkboxContainer = document.createElement("li");
+    var itemDataContainer = document.createElement("div");
+    
+    var checkboxContainer = document.createElement("div");
     var checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("class", "checkbox_item");
     checkboxContainer.appendChild(checkbox);
     itemDataContainer.appendChild(checkboxContainer);
 
+    var itemContainer = document.createElement("div");
+
+    var item = items[i];
+    getValue(item);
+
+
     itemContainer.appendChild(itemDataContainer);
     itemsContainer.appendChild(itemContainer);
 }
-
 
 dataContainer.appendChild(itemsContainer);
