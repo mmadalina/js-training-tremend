@@ -27,8 +27,34 @@ for (var i = 0; i < items.length; i++) {
      * innerText - not supported by firefox
      * textContent - purrrfect
      */
-    idContainer.textContent = item.id;
-    itemDataContainer.appendChild(idContainer);
+    // idContainer.textContent = item.id;
+    // itemDataContainer.appendChild(idContainer);
+
+    // idContainer.textContent = item.name;
+
+    // idContainer.textContent = item.details.description;
+
+    // @TODO
+    var requirements = ["id", "name", {"details" : "description"}];
+    for (var j = 0; j < requirements.length; j++) {
+        var container = document.createElement("li");
+
+        if (typeof requirements[j] === "object") {
+            console.log(requirements[j])
+            for (var prop in requirements[j]) {
+                container.textContent = item[prop][requirements[j][prop]];
+            }
+        } else {
+          console.log(item);
+        // console.log(requirements[j]);
+         container.textContent = item[requirements[j]];
+        }
+        itemDataContainer.appendChild(container);
+
+    
+    }
+
+
 
     var checkboxContainer = document.createElement("li");
     var checkbox = document.createElement("input");
