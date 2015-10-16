@@ -15,26 +15,6 @@ mainCheckbox.addEventListener("change", function() {
     }
 });
 
-function getValue (value, property) {
-    if (typeof value === "string" || typeof value === "number")
-    {
-        if (requirements.indexOf(property) != -1)
-        {
-            var label = document.createElement("div");
-            label.className = property;
-    		label.textContent = value;
-            itemDataContainer.appendChild(label);
-        }
-    };
-    if (typeof value === "object")
-    {
-        for (var prop in value)
-        {
-             getValue (value[prop], prop);
-        }
-    };
-}
-
 dataContainer.appendChild(mainCheckbox);
 
 for (var i = 0; i < items.length; i++) 

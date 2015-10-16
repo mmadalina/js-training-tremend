@@ -10,6 +10,7 @@ function getValue (value, property) {
             // don't use the global var here;
         }
     };
+    
     if (typeof value === "object")
     {
         for (var prop in value)
