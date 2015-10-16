@@ -1,3 +1,5 @@
+requirements = ["name", "description", "filename", "extension", "price"];
+
 var dataContainer = document.querySelector("#data");
 
 var itemsContainer = document.createElement("ul");
@@ -15,31 +17,25 @@ mainCheckbox.addEventListener("change", function() {
 
 dataContainer.appendChild(mainCheckbox);
 
-for (var i = 0; i < items.length; i++) {
-    var item = items[i];
-
-    var itemContainer = document.createElement("li");
-    var itemDataContainer = document.createElement("ul");
-
-    var idContainer = document.createElement("li");
-    /**
-     * innerHtml - only for html content
-     * innerText - not supported by firefox
-     * textContent - purrrfect
-     */
-    idContainer.textContent = item.id;
-    itemDataContainer.appendChild(idContainer);
-
-    var checkboxContainer = document.createElement("li");
+for (var i = 0; i < items.length; i++) 
+{
+    var itemDataContainer = document.createElement("div");
+    
+    var checkboxContainer = document.createElement("div");
     var checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("class", "checkbox_item");
     checkboxContainer.appendChild(checkbox);
     itemDataContainer.appendChild(checkboxContainer);
 
+    var itemContainer = document.createElement("div");
+
+    var item = items[i];
+    getValue(item);
+
+
     itemContainer.appendChild(itemDataContainer);
     itemsContainer.appendChild(itemContainer);
 }
-
 
 dataContainer.appendChild(itemsContainer);
